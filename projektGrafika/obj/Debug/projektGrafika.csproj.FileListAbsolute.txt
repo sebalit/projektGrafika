@@ -67,3 +67,9 @@ C:\Users\Emil Skoczylas\Desktop\Projekt Grafika\projektGrafika\obj\Debug\projekt
 C:\Users\Emil Skoczylas\Desktop\Projekt Grafika\projektGrafika\obj\Debug\projektGrafika.csproj.CopyComplete
 C:\Users\Emil Skoczylas\Desktop\Projekt Grafika\projektGrafika\obj\Debug\projektGrafika.exe
 C:\Users\Emil Skoczylas\Desktop\Projekt Grafika\projektGrafika\obj\Debug\projektGrafika.pdb
+C:\Users\Emil Skoczylas\Desktop\Projekt Grafika\projektGrafika\bin\Debug\MaterialDesignColors.dll
+C:\Users\Emil Skoczylas\Desktop\Projekt Grafika\projektGrafika\bin\Debug\MaterialDesignThemes.Wpf.dll
+C:\Users\Emil Skoczylas\Desktop\Projekt Grafika\projektGrafika\bin\Debug\MaterialDesignColors.pdb
+C:\Users\Emil Skoczylas\Desktop\Projekt Grafika\projektGrafika\bin\Debug\MaterialDesignThemes.Wpf.pdb
+C:\Users\Emil Skoczylas\Desktop\Projekt Grafika\projektGrafika\bin\Debug\MaterialDesignThemes.Wpf.xml
+C:\Users\Emil Skoczylas\Desktop\Projekt Grafika\projektGrafika\obj\Debug\App.baml
