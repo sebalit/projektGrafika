@@ -31,3 +31,5 @@ C:\Users\sebal\source\repos\projektGrafika\projektGrafika\obj\Debug\projektGrafi
 C:\Users\sebal\source\repos\projektGrafika\projektGrafika\obj\Debug\projektGrafika.pdb
 C:\Users\sebal\source\repos\projektGrafika\projektGrafika\obj\Debug\DodajPacjentaWindow.g.cs
 C:\Users\sebal\source\repos\projektGrafika\projektGrafika\obj\Debug\DodajPacjentaWindow.baml
+C:\Users\sebal\source\repos\projektGrafika\projektGrafika\obj\Debug\DawkowanieWindow.g.cs
+C:\Users\sebal\source\repos\projektGrafika\projektGrafika\obj\Debug\DawkowanieWindow.baml

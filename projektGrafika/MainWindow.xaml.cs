@@ -29,28 +29,29 @@ namespace projektGrafika
             string connectionString = "SERVER=localhost;DATABASE=projektgrafika;UID=root;PASSWORD=;";
             MySqlConnection con = new MySqlConnection(connectionString);
 
-            void fillNameList()
+            #region WYPEŁNIENIE LISTY
+            try
             {
-                try
-                {
-                    string query = "SELECT Name, Lastname FROM pacjent";
-                    MySqlCommand cmd = new MySqlCommand(query, con);
-                    con.Open();
-                    MySqlDataReader dr = cmd.ExecuteReader();
+                string query = "SELECT Name FROM pacjent";
+                MySqlCommand cmd = new MySqlCommand(query, con);
 
-                    while (dr.Read())
-                    {
-                        string name = dr.GetString(0);
-                        string lastName = dr.GetString(1);
-                        pacjentList.Items.Add(name + " " + lastName);
-                    }
-                    con.Close();
-                }
-                catch(Exception ex)
+                con.Open();
+
+                MySqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
                 {
-                    MessageBox.Show(ex.Message);
+                    string name = dr.GetString(0);
+                    pacjentList.Items.Add(name);
                 }
+
+                con.Close();
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            #endregion
+
 
             #region previous code
             //DataTable dt = new DataTable();
@@ -64,6 +65,77 @@ namespace projektGrafika
         {
             DodajPacjentaWindow add = new DodajPacjentaWindow();
             add.Show();
+        }
+
+        private void refreshButton_Click(object sender, RoutedEventArgs e)
+        {
+            pacjentList.Items.Clear();
+
+            string connectionString = "SERVER=localhost;DATABASE=projektgrafika;UID=root;PASSWORD=;";
+            MySqlConnection con = new MySqlConnection(connectionString);
+
+            try
+            {
+                string query = "SELECT Name FROM pacjent";
+                MySqlCommand cmd = new MySqlCommand(query, con);
+
+                con.Open();
+
+                MySqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    string name = dr.GetString(0);
+
+                    pacjentList.Items.Add(name);
+                }
+
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void pacjentList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+            string connectionString = "SERVER=localhost;DATABASE=projektgrafika;UID=root;PASSWORD=;";
+            MySqlConnection con = new MySqlConnection(connectionString);
+
+            try
+            {
+
+                string namePacjent = pacjentList.SelectedItem.ToString();
+                
+
+                con.Open();
+
+
+                string query = "SELECT lek.Nazwa, dawkowanie.Dawka, dawkowanie.Data FROM dawkowanie " + 
+                                "LEFT JOIN pacjent ON pacjent.Id = dawkowanie.PacjentId " + 
+                                "RIGHT JOIN lek ON lek.Id = dawkowanie.LekId " + 
+                                "WHERE dawkowanie.Data <= CURDATE() + INTERVAL 7 DAY " +
+                                "AND dawkowanie.Data >= CURDATE() " +
+                                "AND pacjent.Name='" + namePacjent + "'";
+
+                MySqlCommand cmd = new MySqlCommand(query, con);
+                DataTable dt = new DataTable();
+                dt.Load(cmd.ExecuteReader());
+
+                con.Close();
+
+                dawkaGrid.DataContext = dt;
+               
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+
+
+
         }
     }
 }
