@@ -73,3 +73,9 @@ C:\Users\Emil Skoczylas\Desktop\Projekt Grafika\projektGrafika\bin\Debug\Materia
 C:\Users\Emil Skoczylas\Desktop\Projekt Grafika\projektGrafika\bin\Debug\MaterialDesignThemes.Wpf.pdb
 C:\Users\Emil Skoczylas\Desktop\Projekt Grafika\projektGrafika\bin\Debug\MaterialDesignThemes.Wpf.xml
 C:\Users\Emil Skoczylas\Desktop\Projekt Grafika\projektGrafika\obj\Debug\App.baml
+C:\Users\sebal\source\repos\projektGrafika\projektGrafika\bin\Debug\MaterialDesignColors.dll
+C:\Users\sebal\source\repos\projektGrafika\projektGrafika\bin\Debug\MaterialDesignThemes.Wpf.dll
+C:\Users\sebal\source\repos\projektGrafika\projektGrafika\bin\Debug\MaterialDesignColors.pdb
+C:\Users\sebal\source\repos\projektGrafika\projektGrafika\bin\Debug\MaterialDesignThemes.Wpf.pdb
+C:\Users\sebal\source\repos\projektGrafika\projektGrafika\bin\Debug\MaterialDesignThemes.Wpf.xml
+C:\Users\sebal\source\repos\projektGrafika\projektGrafika\obj\Debug\App.baml

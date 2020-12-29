@@ -5,6 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:projektGrafika"
         mc:Ignorable="d"
-        Title="DawkowanieWindow" Height="450" Width="800">
-    <Grid/>
+        Title="DawkowanieWindow" Height="494.262" Width="294.672">
+    <Grid Margin="0,0,0,-2">
+        <ComboBox HorizontalAlignment="Left" Margin="65,25,0,0" VerticalAlignment="Top" Width="159"
+                  Name="pacjentNameComboBox" ItemsSource="{Binding}"/>
+        <ComboBox HorizontalAlignment="Left" Margin="65,82,0,0" VerticalAlignment="Top" Width="159"
+                  Name="lekNameComboBox" ItemsSource="{Binding}"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="65,143,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="159"
+                 Name="dawkaBox"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="108,353,0,0" VerticalAlignment="Top" Width="75"
+                Name="addButton" Click="addButton_Click"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="65,209,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="159"
+                 Name="dataBox"/>
+    </Grid>
 </Window>

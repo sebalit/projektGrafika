@@ -29,7 +29,6 @@ namespace projektGrafika
         private void SanitizeText(string text)
         {
 
-
             //TODO sprwadzanie czy string składa sie tylko z liter
         }
 
@@ -42,13 +41,13 @@ namespace projektGrafika
             {
                 #region DATA
                 string name = nameBox.Text;
-                string lastName = lastnameBox.Text;
+                string description = lastnameBox.Text; //TODO ZMIENIC TEXT BOXA 
                 string age = ageBox.Text;
                 #endregion
 
                 con.Open();
 
-                string query = "INSERT INTO pacjent  VALUES(NULL, '" + name + "', '" + lastName + "', '" + age + "')";
+                string query = "INSERT INTO pacjent  VALUES(NULL, '" + name + "', '" + age + "', '" + description + "')";
                 MySqlCommand cmd = new MySqlCommand(query, con);
                 cmd.ExecuteNonQuery();
                 

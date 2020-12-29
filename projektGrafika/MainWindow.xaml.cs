@@ -99,14 +99,16 @@ namespace projektGrafika
 
         private void pacjentList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            string namePacjent = pacjentList.SelectedItem.ToString();
+
 
             string connectionString = "SERVER=localhost;DATABASE=projektgrafika;UID=root;PASSWORD=;";
             MySqlConnection con = new MySqlConnection(connectionString);
 
+            #region Wyświetlanie data grid planu podawania leków
             try
             {
 
-                string namePacjent = pacjentList.SelectedItem.ToString();
                 
 
                 con.Open();
@@ -133,10 +135,39 @@ namespace projektGrafika
                 MessageBox.Show(ex.Message);
             }
 
+            #endregion
 
-
+            fillingUwagiTextBox(namePacjent);
 
         }
+
+        private void fillingUwagiTextBox(string name)
+        {
+            string connectionString = "SERVER=localhost;DATABASE=projektgrafika;UID=root;PASSWORD=;";
+            MySqlConnection con = new MySqlConnection(connectionString);
+
+            try
+            {
+                con.Open();
+                string query = "SELECT pacjent.Description FROM pacjent WHERE pacjent.Name='" + name + "'";
+
+                MySqlCommand cmd = new MySqlCommand(query, con);
+
+                MySqlDataReader dr = cmd.ExecuteReader();
+
+                while (dr.Read())
+                {
+                    uwagiBox.Text = dr.GetString(0);
+                }
+
+                con.Close();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
         private void btnMinimize_Click(object sender, RoutedEventArgs e)
         {
             WindowState = WindowState.Minimized;
@@ -144,6 +175,12 @@ namespace projektGrafika
         private void btwExitApplication(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
+        }
+
+        private void addDawkaButton_Click(object sender, RoutedEventArgs e)
+        {
+            DawkowanieWindow win = new DawkowanieWindow();
+            win.Show();
         }
     }
 }
