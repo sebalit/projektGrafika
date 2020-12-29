@@ -3,26 +3,38 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:projektGrafika"
         mc:Ignorable="d"
-        Title="MainWindow" Height="800" Width="1280">
-    <Grid>
+        Title="MainWindow" Height="800" Width="1280" WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize">
+    <Grid Background="#100E17">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="291*"/>
             <ColumnDefinition Width="6*"/>
             <ColumnDefinition Width="127*"/>
         </Grid.ColumnDefinitions>
-        <ListBox HorizontalAlignment="Left" Width="169"
-                 Name="pacjentList" ItemsSource="{Binding}" Margin="-1,9,0,282" SelectionChanged="pacjentList_SelectionChanged"/>
-        <Button HorizontalAlignment="Left" Margin="207,100,0,0" VerticalAlignment="Top" Width="75">
-            <Button Content="Odśwież" Width="75" Click="refreshButton_Click"
-                    Name="refreshButton"/>
+        <ListBox Background="#AA6939" HorizontalAlignment="Left" Width="738"
+                 Name="pacjentList" ItemsSource="{Binding}" Margin="52,55,0,430" SelectionChanged="pacjentList_SelectionChanged"/>
+        <Button HorizontalAlignment="Left" Margin="0,70,0,0" Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10"
+                Background="Green" BorderBrush="Green" FontSize="20"
+                VerticalAlignment="Top" Width="150" Height="70"
+                Content="Odśwież" Click="refreshButton_Click" Name="refreshButton" Grid.Column="1" Grid.ColumnSpan="2">
         </Button>
-        <DataGrid HorizontalAlignment="Left" Height="477" Margin="514,10,0,0" VerticalAlignment="Top" Width="323"
-            x:Name="dawkaGrid" ItemsSource="{Binding}"/>
-        <Button Content="Dodaj" HorizontalAlignment="Left" Margin="207,145,0,0" VerticalAlignment="Top" Width="75"
+        <DataGrid Background="DimGray" HorizontalAlignment="Left" Height="272" Margin="52,518,0,0" VerticalAlignment="Top" Width="1136"
+            x:Name="dawkaGrid" ItemsSource="{Binding}" Grid.ColumnSpan="3"/>
+        <Button Content="Dodaj" HorizontalAlignment="Left" Margin="64,406,0,0" Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10"
+                VerticalAlignment="Top" Width="150" Height="70" FontSize="20"
             x:Name="addButton" Click="addButton_Click"/>
         <TextBlock Grid.Column="2" HorizontalAlignment="Left" Margin="49,145,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="255" Width="134"
                    Name="dawkaText" Text="{Binding}"/>
+        <Button Margin="0,10,87,0" HorizontalAlignment="Right" VerticalAlignment="Top" Width="40" Height="40" Style="{StaticResource MaterialDesignFloatingActionAccentButton}" Background="{x:Null}"
+                    ToolTip="Minimize Window" x:Name="btnMinimize" Click ="btnMinimize_Click"  Grid.Column="2">
+            <materialDesign:PackIcon Kind="WindowMinimize" Foreground="White" Width="30" Height="30" />
+        </Button>
+        <Button Margin="321,10,22,750" Width="40" Height="40" Style="{StaticResource MaterialDesignFloatingActionAccentButton}" Background="{x:Null}"
+                    ToolTip="Close" x:Name="btnExitFromGuestWindow" Click="btwExitApplication"  Grid.Column="2">
+            <materialDesign:PackIcon Kind="Close" Foreground="White" Width="30" Height="30" />
+        </Button>
+        <StackPanel Grid.Column="2" Margin="188,0,0,0"/>
     </Grid>
 </Window>
