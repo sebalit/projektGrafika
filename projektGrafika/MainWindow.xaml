@@ -71,5 +71,9 @@
 
             </TextBlock>
         </Grid>
+        <Button Content="Odśwież dawkowanie" HorizontalAlignment="Left" VerticalAlignment="Top" Width="252" Margin="772,235,0,0"
+            x:Name="refreshDawkaButton" Click="refreshDawkaButton_Click" Height="40" Background="#1F5DC6" BorderBrush="Black" FontSize="15" Foreground="Black"/>
+        <Button Content="Usuń pacjenta" HorizontalAlignment="Left" VerticalAlignment="Top" Width="252" Margin="772,280,0,0"
+            x:Name="refreshDawkaButton_Copy1" Click="usunPacjenta_Click" Height="40" Background="#1F5DC6" BorderBrush="Black" FontSize="15" Foreground="Black"/>
     </Grid>
 </Window>

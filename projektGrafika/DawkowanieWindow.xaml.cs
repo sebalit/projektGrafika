@@ -27,8 +27,6 @@ namespace projektGrafika
         public DawkowanieWindow()
         {
             InitializeComponent();
-            //getPacjentId();
-           // getLekId();
             fillPacjentCombo();
             fillLekCombo();
             
@@ -36,7 +34,15 @@ namespace projektGrafika
 
         private void addButton_Click(object sender, RoutedEventArgs e)
         {
-            addDawka(pacjentId, lekId);
+            if(!string.IsNullOrEmpty(lekNameComboBox.Text) && !string.IsNullOrEmpty(pacjentNameComboBox.Text) && !string.IsNullOrEmpty(dawkaBox.Text) && !string.IsNullOrEmpty(dataBox.Text))
+            {
+                addDawka(pacjentId, lekId);
+            }
+            else
+            {
+                MessageBox.Show("Pola nie mogą być puste");
+            }
+            
             
         }
 
@@ -86,7 +92,7 @@ namespace projektGrafika
                 while (dr.Read())
                 {
                     string lekName = dr.GetString(0);
-                    lekNameComboBox.Items.Add(lekName + "2!");
+                    lekNameComboBox.Items.Add(lekName);
 
                 }
                 con.Close();

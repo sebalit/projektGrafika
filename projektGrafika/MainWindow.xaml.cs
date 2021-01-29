@@ -22,6 +22,7 @@ namespace projektGrafika
     /// </summary>
     public partial class MainWindow : Window
     {
+        string namePacjent = "";
         public MainWindow()
         {
             InitializeComponent();
@@ -53,12 +54,6 @@ namespace projektGrafika
             #endregion
 
 
-            #region previous code
-            //DataTable dt = new DataTable();
-            //dt.Load(cmd.ExecuteReader());
-            //con.Close();
-            //pacjentList.Items.Add(dt);
-            #endregion
         }
 
         private void addButton_Click(object sender, RoutedEventArgs e)
@@ -105,7 +100,7 @@ namespace projektGrafika
             if (pacjentList.Items.Count != 0)
 
             {
-                string namePacjent = pacjentList.SelectedItem.ToString();
+                namePacjent = pacjentList.SelectedItem.ToString();
 
 
                 string connectionString = "SERVER=localhost;DATABASE=projektgrafika;UID=root;PASSWORD=;";
@@ -123,7 +118,8 @@ namespace projektGrafika
                                     "RIGHT JOIN lek ON lek.Id = dawkowanie.LekId " +
                                     "WHERE dawkowanie.Data <= CURDATE() + INTERVAL 7 DAY " +
                                     "AND dawkowanie.Data >= CURDATE() " +
-                                    "AND pacjent.Name='" + namePacjent + "'";
+                                    "AND pacjent.Name='" + namePacjent + "'" +
+                                    "ORDER BY dawkowanie.Data ASC";
 
                     MySqlCommand cmd = new MySqlCommand(query, con);
                     DataTable dt = new DataTable();
@@ -143,7 +139,7 @@ namespace projektGrafika
 
                 fillingUwagiTextBox(namePacjent);
             }
-            
+
 
         }
 
@@ -168,7 +164,7 @@ namespace projektGrafika
 
                 con.Close();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -192,6 +188,93 @@ namespace projektGrafika
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
         {
             DragMove();
+        }
+
+        private void refreshDawkaButton_Click(object sender, RoutedEventArgs e)
+        {
+            string connectionString = "SERVER=localhost;DATABASE=projektgrafika;UID=root;PASSWORD=;";
+            MySqlConnection con = new MySqlConnection(connectionString);
+
+
+            #region Wyświetlanie data grid planu podawania leków
+            try
+            {
+                con.Open();
+
+
+                string query = "SELECT lek.Nazwa, dawkowanie.Dawka, dawkowanie.Data FROM dawkowanie " +
+                                "LEFT JOIN pacjent ON pacjent.Id = dawkowanie.PacjentId " +
+                                "RIGHT JOIN lek ON lek.Id = dawkowanie.LekId " +
+                                "WHERE dawkowanie.Data <= CURDATE() + INTERVAL 7 DAY " +
+                                "AND dawkowanie.Data >= CURDATE() " +
+                                "AND pacjent.Name='" + namePacjent + "'" +
+                                "ORDER BY dawkowanie.Data ASC";
+
+                MySqlCommand cmd = new MySqlCommand(query, con);
+                DataTable dt = new DataTable();
+                dt.Load(cmd.ExecuteReader());
+
+                con.Close();
+
+                dawkaGrid.DataContext = dt;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            #endregion
+
+        }
+
+        private void usunPacjenta_Click(object sender, RoutedEventArgs e)
+        {
+            int pacjentId = 0;
+
+            string connectionString = "SERVER=localhost;DATABASE=projektgrafika;UID=root;PASSWORD=;";
+            MySqlConnection con = new MySqlConnection(connectionString);
+
+
+            try
+            {
+                con.Open();
+
+                string query = "SELECT pacjent.Id FROM pacjent WHERE pacjent.Name='" + namePacjent + "'";
+
+                MySqlCommand cmd = new MySqlCommand(query, con);
+                MySqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    pacjentId = dr.GetInt32(0);
+                }
+                con.Close();
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+            try
+            {
+                con.Open();
+
+                string query2 = "DELETE FROM pacjent WHERE pacjent.Id='" + pacjentId + "'";
+                MySqlCommand cmd2 = new MySqlCommand(query2, con);
+                MySqlDataReader dr2 = cmd2.ExecuteReader();
+                con.Close();
+            }
+            catch(Exception ex2)
+            {
+                MessageBox.Show(ex2.Message);
+            }
+
+        }
+
+        private void usunDawke_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
