@@ -45,6 +45,10 @@ namespace projektGrafika
             
             
         }
+        private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
+        }
 
         #region PACJENT COMBO BOX
         private void fillPacjentCombo()
@@ -200,6 +204,11 @@ namespace projektGrafika
             }
             
 
+        }
+
+        private void backButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Hide();
         }
     }
 }

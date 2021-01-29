@@ -5,17 +5,30 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:projektGrafika"
         mc:Ignorable="d"
-        Title="DawkowanieWindow" Height="494.262" Width="294.672">
-    <Grid Margin="0,0,0,-2">
-        <ComboBox HorizontalAlignment="Left" Margin="65,25,0,0" VerticalAlignment="Top" Width="159"
+        Title="DawkowanieWindow" Height="340" Width="400" WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize">
+    <Grid MouseDown="Grid_MouseDown">
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0.1,0" EndPoint="0.9,1">
+                <GradientStop Color="#C511ED" Offset="1"/>
+                <GradientStop Color="#11B8ED" Offset="0"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <ComboBox HorizontalAlignment="Left" Margin="151,22,0,0" VerticalAlignment="Top" Width="159"
                   Name="pacjentNameComboBox" ItemsSource="{Binding}" SelectionChanged="pacjentNameComboBox_SelectionChanged"/>
-        <ComboBox HorizontalAlignment="Left" Margin="65,82,0,0" VerticalAlignment="Top" Width="159"
+        <Label Content="Wybierz pacjenta" HorizontalAlignment="Left" Margin="17,22,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.966,-0.167" FontSize="15"/>
+        <ComboBox HorizontalAlignment="Left" Margin="151,81,0,0" VerticalAlignment="Top" Width="159"
                   Name="lekNameComboBox" ItemsSource="{Binding}" SelectionChanged="lekNameComboBox_SelectionChanged"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="65,143,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="159"
+        <Label Content="Wybierz lek" HorizontalAlignment="Left" Margin="36,81,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.966,-0.167" FontSize="15"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="151,155,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="159"
                  Name="dawkaBox"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="108,353,0,0" VerticalAlignment="Top" Width="75"
-                Name="addButton" Click="addButton_Click"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="65,209,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="159"
+        <Label Content="Dawka" HorizontalAlignment="Left" Margin="52,150,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.966,-0.167" FontSize="15"/>
+        <Button Content="Dodaj" HorizontalAlignment="Left" Margin="253,298,0,0" VerticalAlignment="Top" Width="81"
+                Name="addButton" Click="addButton_Click" Foreground="Black" Height="26"/>
+        <Button Background="#944739" BorderBrush="#944739" Foreground="Black" Content="Wróć" HorizontalAlignment="Left" VerticalAlignment="Top" Width="81" Margin="58,298,0,0"
+                Name="backButton" Click="backButton_Click" Height="26">
+        </Button>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="151,223,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="159"
                  Name="dataBox"/>
+        <Label Content="Data (yyyy-mm-dd)" HorizontalAlignment="Left" Margin="9,218,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.966,-0.167" FontSize="15"/>
     </Grid>
 </Window>

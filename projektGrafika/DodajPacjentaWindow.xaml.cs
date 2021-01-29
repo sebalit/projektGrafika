@@ -34,31 +34,38 @@ namespace projektGrafika
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            string connectionString = "SERVER=localhost;DATABASE=projektgrafika;UID=root;PASSWORD=;";
-            MySqlConnection con = new MySqlConnection(connectionString);
-
-            try
+            if (!string.IsNullOrEmpty(nameBox.Text) && !string.IsNullOrEmpty(ageBox.Text) && !string.IsNullOrEmpty(lastnameBox.Text))
             {
-                #region DATA
-                string name = nameBox.Text;
-                string description = lastnameBox.Text; //TODO ZMIENIC TEXT BOXA 
-                string age = ageBox.Text;
-                #endregion
+                string connectionString = "SERVER=localhost;DATABASE=projektgrafika;UID=root;PASSWORD=;";
+                MySqlConnection con = new MySqlConnection(connectionString);
 
-                con.Open();
+                try
+                {
+                    #region DATA
+                    string name = nameBox.Text;
+                    string description = lastnameBox.Text; //TODO ZMIENIC TEXT BOXA 
+                    string age = ageBox.Text;
+                    #endregion
 
-                string query = "INSERT INTO pacjent  VALUES(NULL, '" + name + "', '" + age + "', '" + description + "')";
-                MySqlCommand cmd = new MySqlCommand(query, con);
-                cmd.ExecuteNonQuery();
-                
-                con.Close();
+                    con.Open();
 
-                this.Close();
+                    string query = "INSERT INTO pacjent  VALUES(NULL, '" + name + "', '" + age + "', '" + description + "')";
+                    MySqlCommand cmd = new MySqlCommand(query, con);
+                    cmd.ExecuteNonQuery();
 
+                    con.Close();
+
+                    this.Close();
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
-            catch(Exception ex)
+            else
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Wypełnij wszystkie pola");
             }
         }
 
@@ -74,6 +81,10 @@ namespace projektGrafika
         {
             System.Text.RegularExpressions.Regex reg = new System.Text.RegularExpressions.Regex("[^0-9]");
             return reg.IsMatch(str);
+        }
+        private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
         }
     }
 }
