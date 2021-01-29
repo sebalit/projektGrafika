@@ -47,7 +47,7 @@
             </TextBlock>
         </Grid>
         <DataGrid  Background="#3C9DED" HorizontalAlignment="Left" Height="310" Margin="226,90,0,0" VerticalAlignment="Top" Width="410"
-            x:Name="dawkaGrid" ItemsSource="{Binding}" FontSize="14"  GridLinesVisibility="All"/>
+            x:Name="dawkaGrid" ItemsSource="{Binding}" FontSize="14"  GridLinesVisibility="All" IsReadOnly="true" />
         <Button Content="Dodaj pacjenta" HorizontalAlignment="Left" Margin="772,100,0,0" Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="0"
                 VerticalAlignment="Top" Width="252" Height="40" FontSize="15" Foreground="Black"
                 Background="#1F5DC6" BorderBrush="Black"
@@ -62,7 +62,8 @@
             </TextBlock>
         </Grid>
         <TextBox HorizontalAlignment="Left" Height="79" Margin="221,498,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="410"
-                 Name="uwagiBox"  Background="White" FontSize="15"/>
+                 Name="uwagiBox"  Background="White" FontSize="15" IsReadOnly="true"
+                 />
         <Button Content="Dodaj dawkowanie" HorizontalAlignment="Left" VerticalAlignment="Top" Width="252" Margin="772,190,0,0"
                 Name="addDawkaButton" Click="addDawkaButton_Click" Height="40" Background="#1F5DC6" BorderBrush="Black" FontSize="15" Foreground="Black"/>
 
