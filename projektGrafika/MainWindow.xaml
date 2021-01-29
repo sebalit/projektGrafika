@@ -20,7 +20,7 @@
                 VerticalAlignment="Top" Width="150" Height="70"
                 Content="Odśwież" Click="refreshButton_Click" Name="refreshButton" Grid.ColumnSpan="3"/>
         <DataGrid Background="DimGray" HorizontalAlignment="Left" Height="272" Margin="52,518,0,0" VerticalAlignment="Top" Width="738"
-            x:Name="dawkaGrid" ItemsSource="{Binding}"/>
+            x:Name="dawkaGrid" ItemsSource="{Binding}" x:FieldModifier="public"/>
         <Button Content="Dodaj" HorizontalAlignment="Left" Margin="859,172,0,0" Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10"
                 VerticalAlignment="Top" Width="150" Height="70" FontSize="20"
             x:Name="addButton" Click="addButton_Click" Grid.ColumnSpan="3"/>

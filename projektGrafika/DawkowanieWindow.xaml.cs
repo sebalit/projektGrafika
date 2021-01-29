@@ -20,6 +20,10 @@ namespace projektGrafika
     /// </summary>
     public partial class DawkowanieWindow : Window
     {
+        private int pacjentId;
+        private int lekId;
+
+
         public DawkowanieWindow()
         {
             InitializeComponent();
@@ -32,7 +36,7 @@ namespace projektGrafika
 
         private void addButton_Click(object sender, RoutedEventArgs e)
         {
-            addDawka(getPacjentId(), 1);
+            addDawka(pacjentId, lekId);
         }
 
         #region PACJENT COMBO BOX
@@ -59,12 +63,12 @@ namespace projektGrafika
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message + "1!");
             }
         }
         #endregion
 
-        #region
+        #region LEK COMBO BOX
         private void fillLekCombo()
         {
             string connectionString = "SERVER=localhost;DATABASE=projektgrafika;UID=root;PASSWORD=;";
@@ -81,7 +85,7 @@ namespace projektGrafika
                 while (dr.Read())
                 {
                     string lekName = dr.GetString(0);
-                    lekNameComboBox.Items.Add(lekName);
+                    lekNameComboBox.Items.Add(lekName + "2!");
 
                 }
                 con.Close();
@@ -91,6 +95,8 @@ namespace projektGrafika
                 MessageBox.Show(ex.Message);
             }
         }
+        #endregion
+
 
         private void addDawka(int pacjentId, int lekId)
         {
@@ -103,7 +109,7 @@ namespace projektGrafika
             dawka = dawkaBox.Text.ToString();
             data = dataBox.Text;
 
-            DateTime dt = DateTime.Parse(data);
+            //Date dt = Date.Parse(data);
 
             string connectionString = "SERVER=localhost;DATABASE=projektgrafika;UID=root;PASSWORD=;";
             MySqlConnection con = new MySqlConnection(connectionString);
@@ -113,92 +119,91 @@ namespace projektGrafika
                 con.Open();
 
                 string query = "INSERT INTO dawkowanie VALUES(NULL, '" + dawka + "', '" + data + "', '" +
-                                pacjentId + "', '" + lekId + "'";
+                                pacjentId + "', '" + lekId + "')";
                 MessageBox.Show(query);
 
                 MySqlCommand cmd = new MySqlCommand(query, con);
                 cmd.ExecuteNonQuery();
 
                 con.Close();
-
-                
-
-                
+  
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message + "3!");
             }
 
         }
 
-        private int getPacjentId()
+        private void pacjentNameComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
-            string pacjentName;
-            pacjentName = pacjentNameComboBox.SelectedValue.ToString();
-
-            int pacjentId = 0;
-
+            int pacjent = this.pacjentNameComboBox.SelectedIndex + 1;
+            string pacjentName = pacjent.ToString();
+            
+            MessageBox.Show(pacjentName);
+            
             string connectionString = "SERVER=localhost;DATABASE=projektgrafika;UID=root;PASSWORD=;";
             MySqlConnection con = new MySqlConnection(connectionString);
 
-            try
+            if(pacjentNameComboBox.SelectedItem != null)
             {
-                con.Open();
-
-                string query = "SELECT pacjent.Id FROM pacjent WHERE pacjent.Name='" + pacjentName + "'";
-
-                MySqlCommand cmd = new MySqlCommand(query, con);
-                MySqlDataReader dr = cmd.ExecuteReader();
-                MessageBox.Show(query);
-                while (dr.HasRows)
+                try
                 {
-                    pacjentId = Int32.Parse(dr.GetString(0));
+                    con.Open();
+                    string query = "SELECT pacjent.Id FROM pacjent WHERE pacjent.Id='" + pacjentName + "'";
+
+                    MySqlCommand cmd = new MySqlCommand(query, con);
+                    MySqlDataReader dr = cmd.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        pacjentId = dr.GetInt32(0);
+                    }
+                    con.Close();
+                    Console.WriteLine(pacjentId);
+
                 }
-
-                con.Close();
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message + "4!");
+                }
             }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
-            return pacjentId;
+            
         }
 
-        private int getLekId()
+        private void lekNameComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
-            string lekName;
-            lekName = lekNameComboBox.SelectedValue.ToString();
-
-            int lekId = 0;
+            int lek = this.lekNameComboBox.SelectedIndex + 1;
+            string lekName = lek.ToString();
 
             string connectionString = "SERVER=localhost;DATABASE=projektgrafika;UID=root;PASSWORD=;";
             MySqlConnection con = new MySqlConnection(connectionString);
-
-            try
+            if(lekNameComboBox.SelectedItem != null)
             {
-                con.Open();
+                try
+                {
+                    con.Open();
 
-                string query = "SELECT lek.Id FROM lek WHERE lek.Nazwa='" + lekName + "'";
-                MessageBox.Show(query);
+                    string query = "SELECT lek.Id FROM lek WHERE lek.Id='" + lekName + "'";
+                    MessageBox.Show(query);
 
-                MySqlCommand cmd = new MySqlCommand(query, con);
-                MySqlDataReader dr = cmd.ExecuteReader();
+                    MySqlCommand cmd = new MySqlCommand(query, con);
+                    MySqlDataReader dr = cmd.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        lekId = dr.GetInt32(0);
+                    }
+                    
 
-                lekId = dr.GetInt32(0);
-
-                con.Close();
+                    con.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message + "5!");
+                }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            
 
-            return lekId;
         }
-        #endregion
     }
 }
