@@ -65,8 +65,6 @@ namespace projektGrafika
         private void backButton_Click(object sender, RoutedEventArgs e)
         {
             this.Hide();
-            MainWindow w = new MainWindow();
-            w.Show();
         }
         private void NumericOnly(System.Object sender, System.Windows.Input.TextCompositionEventArgs e)
         {
