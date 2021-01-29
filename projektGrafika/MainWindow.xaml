@@ -6,38 +6,70 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:projektGrafika"
         mc:Ignorable="d"
-        Title="MainWindow" Height="800" Width="1280" WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize">
-    <Grid Background="#100E17">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="291*"/>
-            <ColumnDefinition Width="6*"/>
-            <ColumnDefinition Width="127*"/>
-        </Grid.ColumnDefinitions>
-        <ListBox Background="#AA6939" HorizontalAlignment="Left" Width="738"
-                 Name="pacjentList" ItemsSource="{Binding}" Margin="52,55,0,430" SelectionChanged="pacjentList_SelectionChanged"/>
-        <Button HorizontalAlignment="Left" Margin="859,70,0,0" Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10"
-                Background="Green" BorderBrush="Green" FontSize="20"
-                VerticalAlignment="Top" Width="150" Height="70"
-                Content="Odśwież" Click="refreshButton_Click" Name="refreshButton" Grid.ColumnSpan="3"/>
-        <DataGrid Background="DimGray" HorizontalAlignment="Left" Height="272" Margin="52,518,0,0" VerticalAlignment="Top" Width="738"
-            x:Name="dawkaGrid" ItemsSource="{Binding}" x:FieldModifier="public"/>
-        <Button Content="Dodaj" HorizontalAlignment="Left" Margin="859,172,0,0" Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10"
-                VerticalAlignment="Top" Width="150" Height="70" FontSize="20"
-            x:Name="addButton" Click="addButton_Click" Grid.ColumnSpan="3"/>
+        Title="MainWindow" Height="600" Width="1024" WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize">
+    
+    <Grid MouseDown="Grid_MouseDown">
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0.1,0" EndPoint="0.9,1">
+                <GradientStop Color="#3832EE" Offset="1"/>
+                <GradientStop Color="#3C9DED" Offset="0"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid Margin="0,5,0,550">
+
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Margin="214,0,212,0" Width="598">
+                <TextBlock Text="Aplikacja dla opiekunów osób starszych i chorych" VerticalAlignment="Center" FontSize="23" FontFamily="Mongolian Baiti" Opacity="0.7" Margin="20 0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="931,0,0,0" Width="93">
+
+                <Button x:Name="buttonMinimize" Width="45" Height="45" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="Black"  Click="btnMinimize_Click">
+                    <materialDesign:PackIcon Kind="WindowMinimize" Width="25" Height="21"/>
+                </Button>
+                <Button x:Name="buttonPOFF" Width="45" Height="45" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="Black" Click="btwExitApplication">
+                    <materialDesign:PackIcon Kind="Power" Width="25" Height="21" />
+                </Button>
+            </StackPanel>
+        </Grid>
+        <Grid Background="#1F5DC6" Margin="0,50,803,510">
+            <TextBlock Text="PACJENCI" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontFamily="Mongolian Baiti" Opacity="0.7">
+
+            </TextBlock>
+        </Grid>
+        <ListBox HorizontalAlignment="Left" Width="221"
+                 Name="pacjentList" ItemsSource="{Binding}" Margin="0,90,0,0" SelectionChanged="pacjentList_SelectionChanged" FontSize="16"/>
+        <Button HorizontalAlignment="Center" Margin="772,145,0,0" Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="0"
+                Background="#1F5DC6" BorderBrush="Black" FontSize="15" Foreground="Black"
+                VerticalAlignment="Top" Width="252" Height="40" 
+                Content="Odśwież listę pacjentów" Click="refreshButton_Click" Name="refreshButton"/>
+        <Grid Background="#1F5DC6" Margin="226,50,388,510">
+            <TextBlock Text="LEKI ORAZ DAWKOWANIE" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontFamily="Mongolian Baiti" Opacity="0.7">
+
+            </TextBlock>
+        </Grid>
+        <DataGrid  Background="#3C9DED" HorizontalAlignment="Left" Height="310" Margin="226,90,0,0" VerticalAlignment="Top" Width="410"
+            x:Name="dawkaGrid" ItemsSource="{Binding}" FontSize="14"  GridLinesVisibility="All"/>
+        <Button Content="Dodaj pacjenta" HorizontalAlignment="Left" Margin="772,100,0,0" Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="0"
+                VerticalAlignment="Top" Width="252" Height="40" FontSize="15" Foreground="Black"
+                Background="#1F5DC6" BorderBrush="Black"
+            x:Name="addButton" Click="addButton_Click"/>
+
         <TextBlock Grid.Column="2" HorizontalAlignment="Left" Margin="49,145,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="255" Width="134"
                    Name="dawkaText" Text="{Binding}"/>
-        <Button Margin="0,10,87,0" HorizontalAlignment="Right" VerticalAlignment="Top" Width="40" Height="40" Style="{StaticResource MaterialDesignFloatingActionAccentButton}" Background="{x:Null}"
-                    ToolTip="Minimize Window" x:Name="btnMinimize" Click ="btnMinimize_Click"  Grid.Column="2">
-            <materialDesign:PackIcon Kind="WindowMinimize" Foreground="White" Width="30" Height="30" />
-        </Button>
-        <Button Margin="321,10,22,750" Width="40" Height="40" Style="{StaticResource MaterialDesignFloatingActionAccentButton}" Background="{x:Null}"
-                    ToolTip="Close" x:Name="btnExitFromGuestWindow" Click="btwExitApplication"  Grid.Column="2">
-            <materialDesign:PackIcon Kind="Close" Foreground="White" Width="30" Height="30" />
-        </Button>
         <StackPanel Grid.Column="2" Margin="188,0,0,0"/>
-        <TextBox Grid.Column="2" HorizontalAlignment="Left" Height="338" Margin="168,452,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="193"
-                 Name="uwagiBox"  Background="White"/>
-        <Button Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Grid.Column="2" Margin="10,518,0,0"
-                Name="addDawkaButton" Click="addDawkaButton_Click"/>
+        <Grid Background="#1F5DC6" Margin="221,442,393,118">
+            <TextBlock Text="Uwagi do pacjenta" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontFamily="Mongolian Baiti" Opacity="0.7">
+
+            </TextBlock>
+        </Grid>
+        <TextBox HorizontalAlignment="Left" Height="79" Margin="221,498,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="410"
+                 Name="uwagiBox"  Background="White" FontSize="15"/>
+        <Button Content="Dodaj dawkowanie" HorizontalAlignment="Left" VerticalAlignment="Top" Width="252" Margin="772,190,0,0"
+                Name="addDawkaButton" Click="addDawkaButton_Click" Height="40" Background="#1F5DC6" BorderBrush="Black" FontSize="15" Foreground="Black"/>
+
+        <Grid Background="#1F5DC6" Margin="772,55,0,505">
+            <TextBlock Text="FUNKCJE" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontFamily="Mongolian Baiti" Opacity="0.7">
+
+            </TextBlock>
+        </Grid>
     </Grid>
 </Window>

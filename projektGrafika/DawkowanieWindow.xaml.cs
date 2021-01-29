@@ -37,6 +37,7 @@ namespace projektGrafika
         private void addButton_Click(object sender, RoutedEventArgs e)
         {
             addDawka(pacjentId, lekId);
+            
         }
 
         #region PACJENT COMBO BOX
@@ -101,15 +102,9 @@ namespace projektGrafika
         private void addDawka(int pacjentId, int lekId)
         {
 
-            string dawka;
-            string data;
+            string dawka = dawkaBox.Text.ToString(); 
+            string data = dataBox.Text;
 
-            //pacjentId = getPacjentId(pacjentName);
-            //lekId = getLekId(lekName);
-            dawka = dawkaBox.Text.ToString();
-            data = dataBox.Text;
-
-            //Date dt = Date.Parse(data);
 
             string connectionString = "SERVER=localhost;DATABASE=projektgrafika;UID=root;PASSWORD=;";
             MySqlConnection con = new MySqlConnection(connectionString);
@@ -120,7 +115,6 @@ namespace projektGrafika
 
                 string query = "INSERT INTO dawkowanie VALUES(NULL, '" + dawka + "', '" + data + "', '" +
                                 pacjentId + "', '" + lekId + "')";
-                MessageBox.Show(query);
 
                 MySqlCommand cmd = new MySqlCommand(query, con);
                 cmd.ExecuteNonQuery();
@@ -130,7 +124,7 @@ namespace projektGrafika
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.Message + "3!");
+                MessageBox.Show(ex.Message);
             }
 
         }
@@ -140,7 +134,6 @@ namespace projektGrafika
             int pacjent = this.pacjentNameComboBox.SelectedIndex + 1;
             string pacjentName = pacjent.ToString();
             
-            MessageBox.Show(pacjentName);
             
             string connectionString = "SERVER=localhost;DATABASE=projektgrafika;UID=root;PASSWORD=;";
             MySqlConnection con = new MySqlConnection(connectionString);
@@ -159,12 +152,11 @@ namespace projektGrafika
                         pacjentId = dr.GetInt32(0);
                     }
                     con.Close();
-                    Console.WriteLine(pacjentId);
 
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message + "4!");
+                    MessageBox.Show(ex.Message);
                 }
             }
             
@@ -185,7 +177,6 @@ namespace projektGrafika
                     con.Open();
 
                     string query = "SELECT lek.Id FROM lek WHERE lek.Id='" + lekName + "'";
-                    MessageBox.Show(query);
 
                     MySqlCommand cmd = new MySqlCommand(query, con);
                     MySqlDataReader dr = cmd.ExecuteReader();
@@ -194,12 +185,11 @@ namespace projektGrafika
                         lekId = dr.GetInt32(0);
                     }
                     
-
                     con.Close();
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message + "5!");
+                    MessageBox.Show(ex.Message);
                 }
             }
             
